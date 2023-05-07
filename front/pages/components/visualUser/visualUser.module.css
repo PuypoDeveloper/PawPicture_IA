@@ -1,0 +1,87 @@
+
+.main { 
+    height: 100vh;
+    margin-top: -3.5em;
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ctnPerfilUser { 
+    background-color: darkgreen;
+    margin-top: 3.5em;
+    height: 90%;
+    width: 97%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
+/*STYLES BTN AND CTN GENERETED IMAGES*/
+
+.btnGenerateImage { 
+    margin-top: 2em;
+    height: 10em !important;
+    background-color: aqua;
+}
+
+/* STYLES IMAGES GENERETED*/
+.yourImages { 
+    margin-top: 4em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.generatedImages { 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
+}
+.generatedImages img { 
+    width: 20em;
+    height: 20em;
+    border-radius: 10px;
+}
+
+/*STYLES MODAL FOR GENERETED IMAGES*/
+.modalGeneretedImage { 
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgb(254, 1, 203);
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
+
+.ctnGenereted { 
+    background-color: chartreuse;
+    padding: 1em;
+    height: 40em;
+    width: 70em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.ctnBoxesGenereted { 
+    height: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+}
+.inputText,
+.resultImages { 
+    background-color: aqua;
+}
+.inputText { 
+    display: flex;
+    flex-direction: column;
+}

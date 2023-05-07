@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from "./logIng.module.css"
 import stylesTwo from "../general.module.css"
+import Link from 'next/link'
 
 interface Props { 
     isOpen: unknown,
@@ -43,7 +44,7 @@ export default function LogIng({isOpen, CloseModal, OpenCreate, OpenForgot}:Prop
                         </div>
                         <input type="password" />
                     </div>
-                    <button className={styles.btnLogIn}>Sign in</button>
+                    <button className={styles.btnLogIn}><Link href="/visualUser">Entrar</Link></button>
                 </form>
             </section>
             <section className={styles.newInCatDog}>
