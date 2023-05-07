@@ -1,0 +1,206 @@
+.main { 
+    background-color: rgb(70, 246, 6);
+    height: 100vh;
+    margin-top: -3.5em;;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    justify-content: center;
+    align-items:end;
+    gap: 1em;
+}
+
+/*ESTILOS CATS*/
+.imageCat { 
+    background-color: aqua;
+    height: 80vh;
+    display: flex;
+    max-width: 30em;
+}
+/*ESTILOS INFORMATION*/
+.information { 
+    background-color: blue;
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+.textInformation { 
+    background-color: rgb(224, 20, 146);
+    flex-grow: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+.textInformation h1 { 
+    font-size: 60px;
+    font-weight: 600;
+}
+.textInformation p { 
+    font-size: 19px;
+}
+.btnGetStarted { 
+    flex-grow: 2;
+    background-color: azure;
+    padding: 1em;
+    width: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btnGetStarted p { 
+    margin: auto;
+    font-weight: 600;
+} 
+
+/*ESTILOS CATS VS DOGS*/
+
+.catVsDog { 
+    flex-grow: 5;
+    width: 100%;
+    background-color: blueviolet;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+.catVsDog h3{ 
+    font-weight: 600;
+}
+.pointsCat { 
+    position: relative;
+    height: 10em;
+    width: 10em;
+    background-color: rgb(232, 73, 15);
+    border-radius: 80px;
+}
+.pointsCat div,
+.pointsDog div { 
+    position: absolute;
+    bottom: 1em;
+    background-color: aqua;
+    width: 2em;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+.pointsCat div p, 
+.pointsDog div p{ 
+    margin: auto;
+    margin-bottom: 5px;
+}
+.pointsDog { 
+    position: relative;
+    height: 10em;
+    width: 10em;
+    background-color: rgb(232, 73, 15);
+    border-radius: 80px;
+}
+.pointsDog div { 
+    right:-0em;
+}
+
+/*ESTILOS DOGS*/
+.imageDog { 
+    background-color: aqua;
+    height: 80vh;
+    display: flex;
+    
+}
+.imageDog img { 
+    max-width: 30em;
+}
+
+/*LOG ING*/
+.LogIn { 
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/*RESPONSIVE*/
+@media(max-width:1400px) { 
+    .imageDog img { 
+        width: 25em;
+    }
+    .imageCat img { 
+        width: 25em;
+    }
+    .information { 
+        width: 25em;
+        margin: auto;
+        margin-bottom: 0;
+    }
+}
+@media(max-width:1230px) { 
+    .imageDog,
+    .imageCat { 
+        height: 70vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+
+    }
+    .imageDog img,
+    .imageCat img { 
+        width: 20em;
+        height: 55vh;
+
+    }
+    .textInformation h1 { 
+        font-size: clamp(30px, 40px, 50px) ;
+        font-weight: 600;
+    }
+    .textInformation h3 { 
+        font-size: clamp(20px, 30px, 40px) ;
+        font-weight: 600;
+    }
+}
+@media(max-width: 1070px) { 
+    .imageDog img,
+    .imageCat img { 
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+
+    }
+    .main { 
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media(max-width: 850px) { 
+    .information { 
+        max-width:20em;
+    }
+    .pointsDog,
+    .pointsCat { 
+        height: 7em;
+        width: 7em;
+    }
+}
+@media(max-width: 600px) { 
+    .imageDog ,
+    .imageCat { 
+        display: none;
+    }
+    .main { 
+        grid-template-columns: 1fr;
+    }
+    .information { 
+        max-width:40em;
+    }
+ 
+}
+@media(max-width: 420px) { 
+    .information { 
+        width:90%;
+    }
+}
+
+
+
