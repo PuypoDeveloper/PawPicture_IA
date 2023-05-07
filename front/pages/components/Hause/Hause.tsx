@@ -2,7 +2,7 @@ import React, { use, useEffect, useState } from 'react'
 import styles from "./Hause.module.css"
 import data from "./Hause.json"
 import { Inter,Fredoka } from '@next/font/google'
-
+import HandlingSatus from '../filesLogin/handlingSatus'
 
 
 const fredoka = Fredoka({ subsets: ["latin"], 
@@ -59,6 +59,9 @@ export default function Hause() {
       <section className={styles.imageDog}>
           <img src="./img/dog.png" alt="" />
       </section>
+      <div className={styles.LogIn} id='LogIn'>
+        <HandlingSatus On={on} onSign={false} />
+      </div>
     </main>
     </>
   )
