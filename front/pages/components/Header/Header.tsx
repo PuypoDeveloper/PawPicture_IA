@@ -4,6 +4,7 @@ import styles from "./Header.module.css"
 import Image from 'next/image'
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
+import HandlingSatus from '../filesLogin/handlingSatus';
 
 
 
@@ -109,6 +110,9 @@ export default function Header() {
                     <li>Sign up</li>
                 </ul>
             </section>
+            <div className={styles.LogIn} id='LogIn'>
+                <HandlingSatus On={on} onSign={onSign} />
+            </div>
         </nav>
     </>
   )

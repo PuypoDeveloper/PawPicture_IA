@@ -1,0 +1,30 @@
+
+.ctnSection { 
+    background-color: brown;
+    width: 25em;
+    height: 30em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.Form button { 
+    display: flex;
+    margin: auto;
+}
+
+.ctnPassword { 
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+/*RESPONSIVE*/
+@media(max-width: 500px) { 
+    .ctnSection { 
+        width: 80%;
+    }
+}

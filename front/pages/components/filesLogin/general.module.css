@@ -1,0 +1,25 @@
+.imageLogo { 
+    width: 3em;
+    height: 3em;
+}
+.modalOff { 
+    display: none;
+}
+
+/*FONDO*/
+.mainLogin,
+.mainCreate,
+.OpenModal { 
+    background-color: rgba(137, 43, 226, 0.846);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.mainLoginOff,
+.mainCreateOff,
+.CloseModal { 
+      display: none;
+  }
