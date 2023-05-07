@@ -5,6 +5,7 @@ import Image from 'next/image'
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import HandlingSatus from '../filesLogin/handlingSatus';
+import Link from 'next/link';
 
 interface Props { 
     userIn: boolean
@@ -92,7 +93,9 @@ export default function Header({userIn}: Props) {
     <>
         <nav className={styles.navBar}>
             <section className={styles.icon}>
-                <img src="/img/logo.png" alt="" />
+                <Link href="/App">
+                    <img src="/img/logo.png" alt="" />
+                </Link>
             </section>
             <section className={styles.menu}>
                 <ul className={styles.menuList}>
@@ -101,7 +104,7 @@ export default function Header({userIn}: Props) {
                         <li><ArrowDropDownRoundedIcon/></li>   
                     </div>
                     <ul className={styles.viewImagesList} id='viewImagesList' onMouseMove={activeViewImages} onMouseLeave={deactivateViewImage}>
-                        <li>Team Cats</li>
+                        <li><Link href="/publicVisual">Team Cats</Link></li>
                         <li>Team Dogs</li>
                         <li>Cats and Dogs</li>
                     </ul>
@@ -112,7 +115,7 @@ export default function Header({userIn}: Props) {
                     </div>
                     <ul className={userIn ? styles.onDropDownUser: styles.ofDropDownUser} id='dropDownUser' onMouseMove={showItemsUser} onMouseLeave={hideItemsUser}>
                         <li>Name</li>
-                        <li>Your images</li>
+                        <li><Link href="/visualUser">Your images</Link></li>
                         <li>Change of password</li>
                         <li>Log out</li>
                     </ul>
