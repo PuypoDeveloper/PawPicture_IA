@@ -6,9 +6,11 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import HandlingSatus from '../filesLogin/handlingSatus';
 
+interface Props { 
+    userIn: boolean
+}
 
-
-export default function Header() {
+export default function Header({userIn}: Props) {
     
     /**Active menu dropdown of ViewImages */
     const activeViewImages = () => { 
@@ -70,7 +72,22 @@ export default function Header() {
         setOnSign(prop)
     }
 
-    
+    /** show features user  */
+
+    const showItemsUser = () => { 
+        const dropDownUser: HTMLElement | null = document.getElementById("dropDownUser")
+        if (dropDownUser !== null) { 
+            dropDownUser.style.display = "flex"
+        }
+    }
+
+    const hideItemsUser = () => { 
+        const dropDownUser: HTMLElement | null = document.getElementById("dropDownUser")
+        if (dropDownUser !== null) { 
+            dropDownUser.style.display = "none"
+        }
+    }
+
   return (
     <>
         <nav className={styles.navBar}>
@@ -79,7 +96,7 @@ export default function Header() {
             </section>
             <section className={styles.menu}>
                 <ul className={styles.menuList}>
-                    <div className={styles.viewImages} onMouseMove={activeViewImages} onMouseLeave={deactivateViewImage}>
+                    <div className={userIn ?  styles.viewImagesChangeUser: styles.viewImages} onMouseMove={activeViewImages} onMouseLeave={deactivateViewImage}>
                         <li>View images</li> 
                         <li><ArrowDropDownRoundedIcon/></li>   
                     </div>
@@ -88,8 +105,17 @@ export default function Header() {
                         <li>Team Dogs</li>
                         <li>Cats and Dogs</li>
                     </ul>
-                    <li onClick={openLogin}>Log in</li>
-                    <li onClick={openSignUp}>Sign up</li>
+                    <li onClick={openLogin} className={userIn ? styles.ofLogIn: styles.onLogIn }>Log in</li>
+                    <li onClick={openSignUp} className={userIn ? styles.ofSignUp: styles.onSignUp }>Sign up</li>
+                    <div className={userIn ? styles.onUserProfile: styles.ofUserProfile} onMouseMove={showItemsUser} onMouseLeave={hideItemsUser}>
+                        <img src="./img/perfil.png" alt="" />
+                    </div>
+                    <ul className={userIn ? styles.onDropDownUser: styles.ofDropDownUser} id='dropDownUser' onMouseMove={showItemsUser} onMouseLeave={hideItemsUser}>
+                        <li>Name</li>
+                        <li>Your images</li>
+                        <li>Change of password</li>
+                        <li>Log out</li>
+                    </ul>
                 </ul>
             </section>
             <section className={styles.IconHamburger} onClick={ActiveMenuHamburger}>

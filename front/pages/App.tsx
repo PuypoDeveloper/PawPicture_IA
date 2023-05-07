@@ -6,7 +6,7 @@ import Hause from './components/Hause/Hause'
 export default function App() {
   return (
     <>
-      <Header/>
+      <Header userIn = {false}/>
       <Hause/>
     </>
   )
