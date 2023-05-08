@@ -39,7 +39,7 @@ export default function LogIng({isOpen, CloseModal, OpenCreate, OpenForgot}:Prop
         if (data.username.length >1 && data.password.length>1) { 
             setCheck(true)
             const formData = data
-            const a = 'http://localhost:4000/user-login'
+            const a = 'http://localhost:4000/links/add'
             fetch(a, { 
                 method: "POST",
                 body:JSON.stringify(formData),
