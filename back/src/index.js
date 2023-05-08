@@ -31,7 +31,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require("./routers/index"))
 app.use(require("./routers/autentications"))
 
-app.use("/links",require("./routers/links"))
+// Route sing up and sing in
+app.use("/links",require("./routers/login"))
+
+
 
 //listen
 
