@@ -23,13 +23,6 @@ app.use(cors({
   }));
   
 
-app.post("/user-login", (req, res) => { 
-    const formData = req.body;
-    console.log("Datos recibidos; ", formData)
-    res.send(formData)
-})
-
-
 //Public
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -37,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use(require("./routers/index"))
 app.use(require("./routers/autentications"))
+
 app.use("/links",require("./routers/links"))
 
 //listen
