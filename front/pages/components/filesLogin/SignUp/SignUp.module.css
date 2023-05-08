@@ -1,0 +1,23 @@
+.ctnCreate{ 
+    background-color:brown;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin: auto;
+}
+
+.passwordEqual { 
+    display: none;
+}
+.passwordEqualOn{ 
+    display: flex;
+}
+.emailIncorrectOn { 
+    display: flex;
+}
+.emailIncorrectOf { 
+    display: none;
+}

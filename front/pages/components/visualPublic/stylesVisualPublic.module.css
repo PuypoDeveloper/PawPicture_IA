@@ -1,0 +1,39 @@
+.main { 
+    background-color: aqua;
+    height: 100vh;
+    margin-top: -3.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ctnAllImages { 
+    background-color: darkgreen;
+    margin-top: 3.5em;
+    height: 90%;
+    width: 97%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.ctnAllImages h2 { 
+    margin-top: 1em;
+}
+.Images { 
+    height: 100%;
+    width: 95%;
+    background-color: black;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
+}
+
+.Images img { 
+    width: 20em;
+    height: 20em;
+    border-radius: 10px;
+}
+
+
+
+
