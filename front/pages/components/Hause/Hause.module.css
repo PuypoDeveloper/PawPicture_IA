@@ -123,6 +123,18 @@
     top: 0;
     left: 0;
 }
+
+/*STYLES BTN*/
+
+.btnGeneretedOf,
+.btnGetStartedOf { 
+    display: none;
+}
+
+.btnGeneretedOn{ 
+    display: flex;
+}
+
 /*RESPONSIVE*/
 @media(max-width:1400px) { 
     .imageDog img { 

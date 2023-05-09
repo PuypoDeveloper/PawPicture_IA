@@ -17,7 +17,9 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
     const [repeatPassword, setRepeatPassword] = useState("")
+    const [name, setName] = useState("")
     const [passwordEquals, setPasswordsEquals] = useState(false)
+
 
 
     const stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => { 
@@ -26,7 +28,7 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
 
     const captureUser = (e:React.ChangeEvent<HTMLInputElement>) => { 
         const a = e.target.value 
-        data.username = a
+        data.email = a
         setUser(a)
     }
     const capturePassword = (e:React.ChangeEvent<HTMLInputElement>) => { 
@@ -37,6 +39,13 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
     const captureRepeatPassword = (e:React.ChangeEvent<HTMLInputElement>) => { 
         const a = e.target.value 
         setRepeatPassword(a)
+    }
+
+    const captureName = (e:React.ChangeEvent<HTMLInputElement>) => { 
+        const a = e.target.value
+        data.name=a
+        setName(a)
+        
     }
 
     //Confirm Password equals
@@ -54,12 +63,14 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
 
     const [check, setCheck] = useState(false)
     const router = useRouter()
+    const [dataUser, setDataUser] = useState({})
 
     const createAcount = (e:React.MouseEvent<HTMLButtonElement>)=> { 
         e.preventDefault()
-        if (user.length > 1 && password.length > 1 && passwordEquals === false) { 
+        if (user.length > 1 && password.length > 1 && name.length>1 && passwordEquals === false) { 
             const formData = data
             const enpoint = 'http://localhost:4000/links/newUser'
+            const enpointUser = 'http://localhost:4000/links/verifyUser'
             fetch(enpoint, {
                 method: "POST",
                 body: JSON.stringify(formData),
@@ -73,6 +84,7 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
                 }
                 else if (typeof data === "object") { 
                     setCheck(false) 
+                    setDataUser(data)
                     router.push("/visualUser")
                 }
             })
@@ -81,6 +93,10 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
             })
         }
     }
+
+    useEffect(()=> {
+        console.log("Prueba: "+dataUser)
+    },[dataUser])
 
 
 
@@ -103,8 +119,12 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
                 <form action="">
                     <div>
                         <p>Username or email address</p>
-                        <input type="text" onChange={captureUser} />
+                        <input type="email" onChange={captureUser} />
                         <p className={check ? styles.emailIncorrectOn : styles.emailIncorrectOf}>existing user</p>
+                    </div>
+                    <div className={styles.nameUser}>
+                        <p>name</p>
+                        <input type="text" onChange={captureName}/>
                     </div>
                     <div>
                         <p>Password</p>

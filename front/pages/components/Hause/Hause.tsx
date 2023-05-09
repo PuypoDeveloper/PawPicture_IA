@@ -1,8 +1,12 @@
-import React, { use, useEffect, useState } from 'react'
+import React, {useEffect, useState, useContext } from 'react'
 import styles from "./Hause.module.css"
 import data from "./Hause.json"
 import { Inter,Fredoka } from '@next/font/google'
 import HandlingSatus from '../filesLogin/handlingSatus'
+import useUserState from '../hooks/stateUser'
+import { counterCountext } from '../../context/counterContext'
+import classNames from 'classnames';
+import Link from 'next/link'
 
 
 const fredoka = Fredoka({ subsets: ["latin"], 
@@ -11,6 +15,8 @@ weight: ["400","600"]})
 
 
 export default function Hause() {
+
+  const {stateUser,userInt,userOut} = useContext(counterCountext)
 
 
   /** MANAGEMENT OF CARDS STATUS */
@@ -22,6 +28,21 @@ export default function Hause() {
   } 
 
 
+  /** USER STATE */
+
+  const [test, setTest] = useState(false)
+
+  useEffect(()=> { 
+    setTest(stateUser)
+  },[stateUser])
+
+
+  console.log("QUE ESTA PASANDO_: " +stateUser )
+
+  /** GO PROFILE USER */
+
+
+  
 
   return (
     <>
@@ -36,8 +57,11 @@ export default function Hause() {
               <p>{data.description}</p>
           </div>
           <div className={styles.ctnbtnGetStarted}>
-              <button className={styles.btnGetStarted} onClick={openLogin}>
+              <button className={test ? styles.btnGetStartedOf: styles.btnGetStarted } onClick={openLogin}>
                    <p className={fredoka.className} >Get Started</p>
+              </button>
+              <button className={test ? styles.btnGeneretedOn :styles.btnGeneretedOf}>
+                  <Link href={"/visualUser"}>Genereted Image</Link>
               </button>
           </div>
           <div className={styles.catVsDog}>
@@ -60,7 +84,7 @@ export default function Hause() {
           <img src="./img/dog.png" alt="" />
       </section>
       <div className={styles.LogIn} id='LogIn'>
-        <HandlingSatus On={on} onSign={false} />
+        <HandlingSatus On={on} onSign={false}/>
       </div>
     </main>
     </>
