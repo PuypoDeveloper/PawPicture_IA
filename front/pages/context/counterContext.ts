@@ -4,5 +4,8 @@ import { createContext } from "react"
 export const counterCountext = createContext({ 
     stateUser: false,
     userInt: () => {},
-    userOut:()=>{}
+    userOut:()=>{},
+    nameUser: "user",
+    ChangeUser: (name:string)=>{}
+
 })

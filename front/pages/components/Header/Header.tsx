@@ -96,13 +96,15 @@ export default function Header({userIn}: Props) {
 
     /** user state */
 
-    const {stateUser,userInt,userOut} = useContext(counterCountext) 
+    const {stateUser,userInt,userOut,ChangeUser,nameUser} = useContext(counterCountext) 
     const [stateInitial, setStateInitial] = useState(userIn)
+    const [userName, setUserName] = useState("user")
 
     useEffect(()=> { 
         if (stateUser === true) { 
             userIn === true
             setStateInitial(true)
+            setUserName(JSON.parse(nameUser))
             console.log("Cambio de cositas: " +userIn)
         }
         else if (stateUser === false) { 
@@ -125,7 +127,13 @@ export default function Header({userIn}: Props) {
         } else {
           router.push("./App")
         }
+        localStorage.clear();
       }
+
+    /**name user */
+
+    
+
 
   return (
     <>
@@ -152,7 +160,7 @@ export default function Header({userIn}: Props) {
                         <img src="./img/perfil.png" alt="" />
                     </div>
                     <ul className={stateInitial ? styles.onDropDownUser: styles.ofDropDownUser} id='dropDownUser' onMouseMove={showItemsUser} onMouseLeave={hideItemsUser}>
-                        <li>Name</li>
+                        <li>{userName}</li>
                         <li><Link href="/visualUser">Your images</Link></li>
                         <li>Change of password</li>
                         <li onClick={OutUser}>Log out</li>

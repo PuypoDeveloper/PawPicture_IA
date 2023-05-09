@@ -30,6 +30,25 @@ export default function StateCompo({children}:{ children: React.ReactNode }) {
   }; 
 
 
+  //Name user
+
+  const [nameUser, setNameUser] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.localStorage.getItem('nameUser') || "false";
+    } else {
+      return "user";
+    }
+  });
+
+  const ChangeUser = (name:string) => { 
+    try {
+      setNameUser(name);
+      window.localStorage.setItem('nameUser', JSON.stringify(name));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
   return (
     <counterCountext.Provider 
@@ -37,10 +56,13 @@ export default function StateCompo({children}:{ children: React.ReactNode }) {
     value={{
         stateUser,
         userInt,
-        userOut
-    }}
+        userOut,
+        nameUser,
+        ChangeUser  
+    }} 
     >
         {children}
     </counterCountext.Provider>
   )
 }
+ 
