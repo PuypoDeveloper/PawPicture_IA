@@ -2,6 +2,7 @@ import React from 'react'
 import styles from "./stylesVisualPublic.module.css"
 
 export default function VisualPublic() {
+
   return (
     <main className={styles.main}>
         <div className={styles.ctnAllImages}>

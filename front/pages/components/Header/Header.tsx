@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import styles from "./Header.module.css"
 import Image from 'next/image'
@@ -6,12 +6,17 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import HandlingSatus from '../filesLogin/handlingSatus';
 import Link from 'next/link';
+import { counterCountext } from '../../context/counterContext';
+import { useRouter } from 'next/router';
 
 interface Props { 
     userIn: boolean
 }
 
 export default function Header({userIn}: Props) {
+
+
+    
     
     /**Active menu dropdown of ViewImages */
     const activeViewImages = () => { 
@@ -89,6 +94,39 @@ export default function Header({userIn}: Props) {
         }
     }
 
+    /** user state */
+
+    const {stateUser,userInt,userOut} = useContext(counterCountext) 
+    const [stateInitial, setStateInitial] = useState(userIn)
+
+    useEffect(()=> { 
+        if (stateUser === true) { 
+            userIn === true
+            setStateInitial(true)
+            console.log("Cambio de cositas: " +userIn)
+        }
+        else if (stateUser === false) { 
+            userIn === false
+            setStateInitial(false)
+        }
+    },[stateInitial])
+
+    console.log("QUE ESTA PASANDO ACA: "+stateUser)
+
+
+    /** USER OUT */
+
+    const router = useRouter()
+
+    const OutUser = () => { 
+        userOut()
+        if (window.location.pathname === '/App') {
+            location.reload()
+        } else {
+          router.push("./App")
+        }
+      }
+
   return (
     <>
         <nav className={styles.navBar}>
@@ -99,7 +137,7 @@ export default function Header({userIn}: Props) {
             </section>
             <section className={styles.menu}>
                 <ul className={styles.menuList}>
-                    <div className={userIn ?  styles.viewImagesChangeUser: styles.viewImages} onMouseMove={activeViewImages} onMouseLeave={deactivateViewImage}>
+                    <div className={stateInitial ?  styles.viewImagesChangeUser: styles.viewImages} onMouseMove={activeViewImages} onMouseLeave={deactivateViewImage}>
                         <li>View images</li> 
                         <li><ArrowDropDownRoundedIcon/></li>   
                     </div>
@@ -108,16 +146,16 @@ export default function Header({userIn}: Props) {
                         <li>Team Dogs</li>
                         <li>Cats and Dogs</li>
                     </ul>
-                    <li onClick={openLogin} className={userIn ? styles.ofLogIn: styles.onLogIn }>Log in</li>
-                    <li onClick={openSignUp} className={userIn ? styles.ofSignUp: styles.onSignUp }>Sign up</li>
-                    <div className={userIn ? styles.onUserProfile: styles.ofUserProfile} onMouseMove={showItemsUser} onMouseLeave={hideItemsUser}>
+                    <li onClick={openLogin} className={stateInitial ? styles.ofLogIn: styles.onLogIn }>Log in</li>
+                    <li onClick={openSignUp} className={stateInitial ? styles.ofSignUp: styles.onSignUp }>Sign up</li>
+                    <div className={stateInitial ? styles.onUserProfile: styles.ofUserProfile} onMouseMove={showItemsUser} onMouseLeave={hideItemsUser}>
                         <img src="./img/perfil.png" alt="" />
                     </div>
-                    <ul className={userIn ? styles.onDropDownUser: styles.ofDropDownUser} id='dropDownUser' onMouseMove={showItemsUser} onMouseLeave={hideItemsUser}>
+                    <ul className={stateInitial ? styles.onDropDownUser: styles.ofDropDownUser} id='dropDownUser' onMouseMove={showItemsUser} onMouseLeave={hideItemsUser}>
                         <li>Name</li>
                         <li><Link href="/visualUser">Your images</Link></li>
                         <li>Change of password</li>
-                        <li>Log out</li>
+                        <li onClick={OutUser}>Log out</li>
                     </ul>
                 </ul>
             </section>

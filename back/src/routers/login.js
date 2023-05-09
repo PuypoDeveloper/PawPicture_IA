@@ -6,9 +6,9 @@ const pool = new Pool(config)
 
 //funtion add user
 
-const insertUser = async (user,password) => { 
-    const text = 'INSERT INTO login (usuario, password) VALUES ($1, $2)'
-    const values = [user,password]
+const insertUser = async (user,password,name) => { 
+    const text = 'INSERT INTO login (usuario, password) VALUES ($1, $2, $3)'
+    const values = [user,password, name]
     const res = await pool.query(text, values)
     console.log(res);
 
@@ -21,17 +21,18 @@ const router = express.Router()
 //path to add user
 
 router.post("/newUser", async (req, res) => { 
-    const {username, password} = req.body;
+    const {username, password, name} = req.body;
     const newData = { 
         username,
-        password
+        password,
+        name
     }
     const text = `SELECT COUNT (*) FROM login WHERE usuario ='${username}'`
     const rest = await pool.query(text)
     const count = rest.rows[0].count
     if (count < 1) { 
         console.log("Datos recibidos; ", newData)
-        insertUser(newData.username,newData.password)
+        insertUser(newData.username,newData.password,newData.name)
         res.send(newData)
     }
     else if (count > 0) { 
@@ -48,10 +49,11 @@ router.post("/newUser", async (req, res) => {
 
 
 router.post("/verifyUser", async (req, res) => { 
-    const {username, password} = req.body
+    const {username, password, name} = req.body
     const newData = { 
         username,
-        password
+        password,
+        name
     }
     //check if account exists
 

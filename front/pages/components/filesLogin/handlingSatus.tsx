@@ -15,7 +15,7 @@ import useModalStart from './hooks/useModalStart'
 
 interface Props { 
   On: boolean
-  onSign: boolean
+  onSign: boolean,
 }
 
 export default function HandlingSatus({On,onSign}:Props) {

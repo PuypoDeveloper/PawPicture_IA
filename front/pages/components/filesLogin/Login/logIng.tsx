@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import styles from "./logIng.module.css"
 import stylesTwo from "../general.module.css"
 import Link from 'next/link'
 import data from "./data.json"
 import { useRouter } from 'next/router'
 import cors from "cors"
+import useUserState from '../../hooks/stateUser'
+import { counterCountext } from '../../../context/counterContext'
 
 
 
@@ -16,6 +18,11 @@ interface Props {
 }
 
 export default function LogIng({isOpen, CloseModal, OpenCreate, OpenForgot}:Props) {
+
+
+    //state of user
+     
+    const {stateUser,userInt,userOut} = useContext(counterCountext)
 
     const PreventClose = (e:React.MouseEvent<HTMLDivElement>) => { 
         e.stopPropagation()
@@ -67,6 +74,8 @@ export default function LogIng({isOpen, CloseModal, OpenCreate, OpenForgot}:Prop
                 else if (data === "correct_password") { 
                     setCheck(false)
                     setChec2k(false)
+                    userInt()
+                    console.log("OTRO PASO: "+stateUser)
                     router.push("./visualUser")
                 }
             })
