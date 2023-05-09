@@ -7,7 +7,7 @@ const pool = new Pool(config)
 //funtion add user
 
 const insertUser = async (user,password,name) => { 
-    const text = 'INSERT INTO login (usuario, password) VALUES ($1, $2, $3)'
+    const text = 'INSERT INTO login (usuario, password, name) VALUES ($1, $2, $3)'
     const values = [user,password, name]
     const res = await pool.query(text, values)
     console.log(res);
@@ -33,7 +33,7 @@ router.post("/newUser", async (req, res) => {
     if (count < 1) { 
         console.log("Datos recibidos; ", newData)
         insertUser(newData.username,newData.password,newData.name)
-        res.send(newData)
+        res.send([newData.username,newData.name])
     }
     else if (count > 0) { 
         console.log("MAYOR QUE 0")
@@ -49,12 +49,17 @@ router.post("/newUser", async (req, res) => {
 
 
 router.post("/verifyUser", async (req, res) => { 
-    const {username, password, name} = req.body
+    const {username, password} = req.body
     const newData = { 
         username,
         password,
-        name
     }
+
+    //name user
+
+    const nameUser = `SELECT name FROM login WHERE usuario = '${username}'`
+    const queryName = await pool.query(nameUser)
+
     //check if account exists
 
     const queryUsername = `SELECT usuario FROM login WHERE usuario = '${username}'`
@@ -68,7 +73,7 @@ router.post("/verifyUser", async (req, res) => {
         const restTwo = await pool.query(queryPassword)
         const checkPassword = restTwo.rows[0].password
         if(checkPassword === password) { 
-            res.json("correct_password")
+            res.send(["correct_password", queryName.rows[0].name])
         }
         else if (checkPassword !== password) { 
             res.json("Incorrect_password")
