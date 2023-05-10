@@ -1,12 +1,33 @@
 /* ESTILOS NAVBAR*/
 
-.navBar { 
-    height: 3.5em;
-    background-color: aqua;
+.navBarBlu,
+.navBarPink { 
+    height: 5em;
+    padding: 1em;
+    background-color: rgb(0, 0, 0);
     display: flex;
+    z-index: 1 !important;
  
 }
+.navBarBlu { 
+    box-shadow: 100px 5px 10px 0px rgb(8, 93, 230); 
+} 
+.navBarPink { 
+    box-shadow: 100px 5px 10px 0px rgb(179, 13, 204); 
+}
 
+.logoAndTitle { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    gap: 0.5em;
+}
+.logoAndTitle p { 
+    margin-top: 1em;
+    color: white;
+    font-weight: 700;
+}
 /*ESTILOS ICONO*/
 
 .icon { 
@@ -14,19 +35,18 @@
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    background-color: blue;
 }
 
 .icon img { 
-    width: 3em;
-    height: 3em;
+    width: 4em;
+    height: 4em;
+    border-radius: 30px;
     cursor: pointer;
 }
 
 /*ESTILOS MENU*/
 
 .menu{ 
-    background-color: brown;
     flex-grow: 12;
     display: flex;
     justify-content: right;
@@ -38,13 +58,17 @@
     align-items: center;
     list-style: none;
     gap: 2em;
-    background-color: blueviolet;
     height: 100%;
     margin-right: 3em;
     margin-top: 1em;
 }
 .menuList li { 
     cursor: pointer;
+    color: white;
+    transition: 0.3s;
+}
+.menuList li:hover { 
+    color: rgb(8, 93, 230);
 }
 .viewImages { 
     display: flex;
@@ -52,37 +76,80 @@
     align-items: center;
     width: 9em;
     height: 100%;
-    background-color: blue;
+
 }
 
 /*ESTILOS VIEW IMAGES*/
 
-.viewImagesList { 
+.viewImagesList,
+.viewImagesListOn { 
     position: absolute;
     top: 3em;
     right: 13.5em;
-    background-color: aqua;
-    padding: 1em;
+    padding: 1.5em;
     display: flex;
     justify-content: center;
     align-items: center;
     list-style: none;
     text-align: center;
+
+}
+
+.viewImagesListOn { 
+    top: 3em;
+    right: 10em;
+    display: none;
+    
+
+}
+
+.ctnViewImagesList,
+.ctnViewImagesListOn { 
+    background-color: rgba(8, 93, 230, 0.816);
+    border-radius: 5px;
+    padding: 1em;
+    box-shadow: 1px 1px 10px 1px rgba(179, 13, 204, 0.563);
+    list-style: none;
+}
+
+.ctnViewImagesListOn { 
+    background-color: rgba(179, 13, 204, 0.812);
+    box-shadow: 1px 1px 10px 1px rgba(8, 93, 230, 0.426);
+}
+
+
+.Team_Cats { 
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
 }
 .viewImagesList li { 
     margin-bottom: 0.5em;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.viewImagesList li:hover,
+.Team_Cats:hover { 
+    color: black;
+    scale: 1.1;
 }
 .viewImagesList { 
     display: none;
 }
 
 /*ESTILO HAMBURGER*/
+.IconHamburguer { 
+    color: white;
+}
 
 .IconHamburger { 
     display: none;
 }
 .menuHamburger { 
     display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .LogIn { 
@@ -119,31 +186,83 @@
     cursor: pointer;
 }
 .onDropDownUser { 
-
     flex-direction: column;
     list-style: none;
     gap: 0.5em;
     position: absolute;
-    top: 3em;
-    background-color: chartreuse;
+    top: 3.5em;
     padding: 1em;
     right: 1em;
     text-align: center;
 }
+
+.ctnOnDropDownUser { 
+    text-decoration: none;
+    list-style: none;
+    background-color: rgba(179, 13, 204, 0.812);
+    padding: 1em;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.3em;
+}
+
+.linkVisualUser { 
+    text-decoration: none;
+    color: white;
+}
+
+.ctnOnDropDownUser li { 
+    margin: auto;
+    text-align: center;
+    text-decoration: none;
+}
 .viewImagesChangeUser { 
     display: flex;
-    margin-right: 3.5em;
+
     display: flex;
     justify-content: center;
     align-items: center;
     width: 9em;
     height: 100%;
-    background-color: blue;
 }
 
 
+.lavelMenuDr0pDownOn  { 
+    display: none;
+}
+.lavelMenuDr0pDown { 
+    display: flex;
+}
 
-
+.ctnOnDropDownUserHamburger { 
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.ctnLabelUserHamburger { 
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    gap: 1em;
+}
+.ctnLabelUserHamburger:hover { 
+    background-color: rgba(46, 43, 226, 0.624);
+    padding: 0.5em;
+}
+.onDropDownUserHamburger { 
+    display: none;
+}
+.ofDropDownUserHamburguer { 
+    display: none;
+}
+.ctnLabelUserHamburgerOf { 
+    display: none;
+}
 
 
 /*RESPONSIVE*/
@@ -168,23 +287,38 @@
         margin-right: 2em;
     }
     .menuHamburger { 
-        background-color: rgb(245, 5, 221);
+        background-color: rgba(137, 43, 226, 0.274);
+        backdrop-filter: blur(5px);
         position: absolute;
         height: 100vh;
         width: 100vw;
         z-index: 1;
         display: none;
+        color: white;
 
     }
     .menuListTwo { 
-        background-color: aqua;
+        background-color: rgb(6, 6, 6);
+        box-shadow: 1px 1px 10px 1px rgba(8, 93, 230, 0.426);
         height: 100vh;
         width: 20em;
         display: flex;
         flex-direction: column;
         list-style: none;
         padding-top: 2em;
+        padding-right: 2em;
         gap: 1em;
+        
+
+    }
+    .lavelMenuDr0pDown:hover,
+    .viewImagesH:hover { 
+        background-color: rgba(46, 43, 226, 0.624);
+        width: 100%;
+        padding: 0.5em;
+        border-radius: 5px;
+        
+        
     }
     .viewImagesH { 
         display: flex;
@@ -197,7 +331,11 @@
         gap: 1em;
     }
 }
-
+@media(max-width: 400px) { 
+    .icon { 
+        margin-left: 0em;
+    }
+}
 @media(max-width: 500px) { 
     .menuListTwo { 
         width: 15em;

@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import styles from "./SignUp.module.css"
+import styles from "../Login/logIng.module.css"
+import stylesThree from "./SignUp.module.css"
 import stylesTwo from "../general.module.css"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import data from "./SignUp.json"
 import { useRouter } from 'next/router';
 import { counterCountext } from '../../../context/counterContext';
+import BtnHome from '../../Elements/Buttons/BtnHome';
+import ArrowBack from '../../Elements/ArrowBack/ArrowBack';
 
 interface Props { 
     isOpen: boolean,
@@ -70,7 +73,7 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
     const router = useRouter()
     const [dataUser, setDataUser] = useState([])
 
-    const createAcount = (e:React.MouseEvent<HTMLButtonElement>)=> { 
+    const createAcount = (e:React.MouseEvent)=> { 
         e.preventDefault()
         if (user.length > 1 && password.length > 1 && name.length>1 && passwordEquals === false) { 
             const formData = data
@@ -103,42 +106,44 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
 
   return (
     <main className={`${isOpen ? stylesTwo.mainCreate:stylesTwo.mainCreateOff }`} onClick={CloseModal}>
-        <div className={styles.ctnCreate} onClick={stopPropagation}>
-            <div onClick={()=>{
-                CloseModal()
-                OpenLogIn()
-            }}>
-                <ArrowBackIcon/>
-            </div>
-            <section className={styles.nameIcon}>
-                <div>
-                    <img src="./img/logo.png" alt="" className={stylesTwo.imageLogo} />
-                    <h2>Sign up to CatDog IA</h2>
+        <div className={styles.ctnModal}>
+            <div className={`${styles.ctnSection} ${stylesThree.ctnSection2}`} onClick={stopPropagation}>
+                <div onClick={()=>{
+                    CloseModal()
+                    OpenLogIn()
+                }} className={stylesThree.arrowBack}>
+                    <ArrowBack/>
                 </div>
-            </section>
-            <section className={styles.ctnFormLogin}>
-                <form action="">
+                <section className={styles.nameIcon}>
                     <div>
-                        <p>Username or email address</p>
-                        <input type="email" onChange={captureUser} />
-                        <p className={check ? styles.emailIncorrectOn : styles.emailIncorrectOf}>existing user</p>
+                        <img src="./img/logo.png" alt="" className={stylesTwo.imageLogo} />
+                        <h2 className={stylesThree.title}>Sign up to CatDog IA</h2>
                     </div>
-                    <div className={styles.nameUser}>
-                        <p>name</p>
-                        <input type="text" onChange={captureName}/>
-                    </div>
-                    <div>
-                        <p>Password</p>
-                        <input type="password" onChange={capturePassword} />
-                    </div>
-                    <div>
-                        <p>Repeat password</p>
-                        <input type="password" onChange={captureRepeatPassword} />
-                    </div>
-                    <p className={ passwordEquals ? styles.passwordEqualOn : styles.passwordEqual} id='passwordEqual' >The passwords do not match</p>
-                    <button onClick={createAcount}>Create</button>
-                </form>
-            </section>
+                </section>
+                <section className={`${styles.ctnFormLogin} ${stylesThree.ctnFormLogin2}`}>
+                    <form action="" className={`${styles.Form} ${stylesThree.form2}`}>
+                        <div className={stylesThree.ctnDivForm}>
+                            <p>email</p>
+                            <input type="email" onChange={captureUser} />
+                            <p className={check ? stylesThree.emailIncorrectOn : stylesThree.emailIncorrectOf}>existing user</p>
+                        </div>
+                        <div className={stylesThree.ctnDivForm}>
+                            <p>name</p>
+                            <input type="text" onChange={captureName}/>
+                        </div>
+                        <div className={stylesThree.ctnDivForm}>
+                            <p>Password</p>
+                            <input type="password" onChange={capturePassword} />
+                        </div>
+                        <div className={stylesThree.ctnDivForm}>
+                            <p>Repeat password</p>
+                            <input type="password" onChange={captureRepeatPassword} />
+                        </div>
+                        <p className={ passwordEquals ? stylesThree.passwordEqualOn : stylesThree.passwordEqual} id='passwordEqual' >The passwords do not match</p>
+                        <div onClick={createAcount} className={styles.btnLogIn}><BtnHome text={"Log In"} color={false}/></div>
+                    </form>
+                </section>
+            </div>
         </div>
 </main>
   )

@@ -1,14 +1,70 @@
 
 .ctnSection { 
-    background-color: brown;
-    width: 25em;
-    height: 30em;
+    background-color:rgb(0, 0, 0);
+    box-shadow: 0px 1px 5px 1px rgba(179, 13, 204, 0.544);
+    border-radius: 10px;
+    padding: 2em;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-
+    color: white;
+    
 }
+
+.ctnSection { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nameIcon{ 
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 2em;
+}
+.nameIcon div { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.nameIcon div img { 
+    width: 5em;
+    height: 5em;
+}
+
+.nameIcon div h2 { 
+    font-size: 30px;
+}
+
+.ctnFormLogin { 
+    width: 80%;
+}
+
+.username input,
+.ctnPassword input { 
+    width: 100%;
+    border-radius: 5px;
+    padding: 0.2em;
+}
+
+.ctnPassword div { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
+}
+.ctnPassword div p { 
+     margin: auto 0;
+}
+.ctnPassword div a { 
+    text-decoration: none;   
+}
+
 
 .Form button { 
     display: flex;
@@ -31,9 +87,73 @@
     display: none;
 }
 
+
+.btnLogIn { 
+    height: 3em;
+    width: 100%;
+    margin-top: 2em;
+}
+
+.newInCatDog div { 
+    display: flex;
+    gap: 1em;
+    margin-top: 2em;
+}
+
+.ctnModal,
+.ctnModal2 { 
+    background-color: rgb(0, 0, 0);
+    padding: 0.8em;
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 1px rgb(8, 93, 230);
+    position: relative;
+}
+
+.textForgotPasswordTwo { 
+    display: none;
+}
 /*RESPONSIVE*/
 @media(max-width: 500px) { 
+    .ctnModal { 
+        width: 90%;
+    }
+    .ctnFormLogin { 
+        width: 100%;
+    }
+    .title { 
+        font-size: 10px;
+        text-align: center;
+    }
+}
+
+@media(max-width: 420px) { 
+    .newInCatDog div { 
+        flex-direction: column;
+        gap: 0;
+    }
+    .textForgotPasswordOne { 
+        display: none;
+    }
+    .textForgotPasswordTwo { 
+        display: flex;
+        text-decoration: none;
+    }
+}
+
+@media(max-height: 730px) { 
+    .ctnModal { 
+        height: 38em;
+    }
     .ctnSection { 
-        width: 80%;
+        height: 100%;
+    
+    }
+    .btnLogIn { 
+        margin-top: 1em;
+    }
+}
+@media(max-width: 310px) { 
+    .title { 
+        font-size: 20px !important;
     }
 }
