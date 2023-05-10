@@ -1,0 +1,41 @@
+.btnHomeBlu { 
+    padding: 1em;
+    border-radius: 10px;
+    background-color:rgb(50, 121, 234) ;
+    box-shadow: 0px 1px 15px 1px rgba(179, 13, 204, 0.6);
+    color:  white;
+    font-size: 17px;
+    font-weight: 600;
+    transition: 0.4s;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center !important;
+}
+
+.btnHomeBlu:hover { 
+    box-shadow: 0px 1px 15px 1px rgba(50, 121, 234, 0.615);
+    background-color:rgba(179, 13, 204, 0.959) ;
+    scale: 0.95;
+}
+.btnHomePink { 
+    padding: 0em;
+    border-radius: 10px;
+    background-color:rgba(179, 13, 204, 0.959);
+    box-shadow: 0px 1px 15px 1px rgba(50, 121, 234, 0.615);
+    color:  white;
+    font-size: 17px;
+    font-weight: 600;
+    transition: 0.4s;
+    width: 90%;
+    height: 90%;
+    justify-content: center;
+    align-items: center ;
+}
+.btnHomePink:hover { 
+    box-shadow: 0px 1px 15px 1px rgba(179, 13, 204, 0.6);
+    background-color:rgb(50, 121, 234) ;
+    scale: 0.95;
+}

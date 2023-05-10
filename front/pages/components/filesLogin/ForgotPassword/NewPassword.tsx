@@ -1,7 +1,10 @@
 import React from 'react'
-import styles from "./ForgotPassword.module.css"
+import styles from "../Login/logIng.module.css"
+import stylesThree from "./ForgotPassword.module.css"
 import stylesTwo from "../general.module.css"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBack from '../../Elements/ArrowBack/ArrowBack';
+import BtnHome from '../../Elements/Buttons/BtnHome';
 
 interface Props { 
   isOpen: boolean,
@@ -16,23 +19,31 @@ export default function NewPassword ({isOpen, CloseModal, OpenEnterCode, OpenChe
   }
   return (
     <main className={`${isOpen ? stylesTwo.OpenModal: stylesTwo.CloseModal}`} onClick={CloseModal}>
-        <form action="" className={styles.ctnFormLogin} onClick={stopPropagation}>
+      <div className={styles.ctnModal2}>
+        <section className={`${styles.ctnSection} ${stylesThree.ctnSection2}`}  onClick={stopPropagation}>
             <div onClick={()=> { 
                   CloseModal()
                   OpenEnterCode()
                 }}>
-                    <ArrowBackIcon/>
+                    <ArrowBack/>
             </div>
-            <p>New password</p>
-            <input type="password" />
-            <p>Repeat new password</p>
-            <input type="password" />
-            <button onClick={(e)=>{ 
-              CloseModal()
-              OpenCheck()
-              e.preventDefault()
-            }}>Change</button>
-        </form>
-</main>
+            <form action="" className={`${styles.ctnFormLogin} ${stylesThree.ctnFormLogin3}`}>
+              <div>
+                <p>New password</p>
+                <input type="password" />
+              </div>
+              <div>
+                <p>Repeat new password</p>
+                <input type="password" />
+              </div>
+              <div onClick={(e)=>{ 
+                CloseModal()
+                OpenCheck()
+                e.preventDefault()
+              }} className={stylesThree.ctnBtn}><BtnHome text={"Change"} color={true}/></div>
+            </form>
+        </section>
+      </div>
+  </main>
   )
 }

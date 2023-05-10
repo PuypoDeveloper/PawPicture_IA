@@ -1,0 +1,14 @@
+.ArrowBack { 
+    padding: 0.2em;
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.ArrowBack:hover { 
+    color:rgb(179, 13, 204) ;
+    scale: 0.95;
+}
+
