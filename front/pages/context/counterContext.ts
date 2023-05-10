@@ -6,6 +6,8 @@ export const counterCountext = createContext({
     userInt: () => {},
     userOut:()=>{},
     nameUser: "user",
-    ChangeUser: (name:string)=>{}
+    ChangeUser: (name:string)=>{},
+    email: "email",
+    ChangeEmail: (email:string)=>{}
 
 })

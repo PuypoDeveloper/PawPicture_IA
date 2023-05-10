@@ -1,11 +1,41 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect, useContext} from 'react'
 import styles from "./visualUser.module.css"
 import ReplayIcon from '@mui/icons-material/Replay';
 import dataDescription from "./description.json"
 import { Configuration, OpenAIApi } from "openai";
 import Image from 'next/image';
+import { counterCountext } from '../../context/counterContext';
+import { headers } from 'next/dist/client/components/headers';
+import { error } from 'console';
 
 export default function VisualUserC() {
+     //VERIFY STATE USER
+
+     const {email} = useContext(counterCountext)
+     const [addNewImage, setAddImage] = useState<object[]>([])
+
+    
+     useEffect(()=> { 
+         dataDescription.userId = JSON.parse(email) 
+         const url = "http://localhost:4000/images/SEND"
+    const formData = dataDescription
+    fetch(url,{ 
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {"content-Type":"application/json"},
+    })
+    .then (response => response.json())
+    .then(data => { 
+        console.log(data)
+        setAddImage(data)
+    })
+
+     },[email])
+
+
+    // CHARGE INFO USER
+    
+    //OPEN MODAL GENERETE IMAGES
 
     const openGeneretedImages = () => { 
         const modalGeneretedImage =  document.getElementById("modalGeneretedImage")
@@ -26,19 +56,12 @@ export default function VisualUserC() {
         e.stopPropagation()
     }
     
-    //Capture description pet 
+    //COUNTER ADD IMAGES
 
-    const [description, setDescription] = useState("")
     const [counter, setCounter] = useState(0)
 
-    const captureDescription = (e:React.ChangeEvent<HTMLTextAreaElement>) => { 
-        const a = e.target.value
-        setDescription(a)
-    }
+    //CONFIG API OPEN IA
 
-
-
-    //configuracion 
     const [prompt, setPrompt] = useState("");
     const [result, setResult] = useState<string | undefined>("");
     const [loading, setLoading] = useState(false);
@@ -64,21 +87,36 @@ export default function VisualUserC() {
         });
         setLoading(false);
         setResult(res.data.data[0].url);
-        console.log(res.data.data[0].url)
-        setPrompt(description)
-        setCounter(counter+1)
   };
 
     
-// add image of the body 
+// ADD IMAGES OF THE BODY 
 
-const [addNewImage, setAddImage] = useState<object[]>([])
+const saveImage = () => { 
+    setCounter(counter+1)
+    if (result !== undefined) { 
+        dataDescription.prompt = prompt
+        dataDescription.url = result
+        const formData = dataDescription
+        const url = "http://localhost:4000/images/URL"
+        fetch(url, { 
+            method:"POST",
+            body: JSON.stringify(formData),
+            headers: {"content-Type":"application/json"}
+        })
+        .then(response => response.json())
+        .then(data => { 
+            console.log(data)
+        })
+        .catch (error => { 
+            console.error("todo se fue a la mierda")
+        })
+    }
 
-console.log("QUEEEEEEEEEEEE MIERDAAAAAAAAAAAAAAA: "+addNewImage.length)
-
+}
 
 const addImage = (image:string) => { 
-    const newImage = {srt: image}
+    const newImage = {url: image}
     setAddImage([...addNewImage,newImage])
     
 }
@@ -89,10 +127,11 @@ useEffect(()=> {
     }
 },[counter])
 
+//MASAGE STRING TOO SHORT
 
     useEffect(()=> { 
         const b = document.getElementById("description")
-        if(description.length > 5) { 
+        if(prompt.length > 5) { 
             if (b !== null) { 
                 b.style.display = "none" 
             }
@@ -102,7 +141,9 @@ useEffect(()=> {
                 b.style.display = "flex" 
             }
         }
-    },[description])
+    },[prompt])
+
+
 
   return (
     <main className={styles.main}>
@@ -123,7 +164,7 @@ useEffect(()=> {
                     <img src="./img/imagesGenereted/8.png" alt="" />
                     { 
                         addNewImage.map((img,index)=> (
-                            <img key={index} src={img.srt} />
+                            <img key={index} src={img.url} />
                         ))
                     }
                 </div>
@@ -158,7 +199,7 @@ useEffect(()=> {
                             )}
                         </div>
                     </div>
-                    <button>Save</button>
+                    <button onClick={saveImage}>Save</button>
                     <button>Discart</button>
                 </div>
             </section>  

@@ -22,7 +22,7 @@ export default function LogIng({isOpen, CloseModal, OpenCreate, OpenForgot}:Prop
 
     //state of user
      
-    const {stateUser,userInt,userOut,ChangeUser,nameUser} = useContext(counterCountext)
+    const {userInt,ChangeUser,ChangeEmail} = useContext(counterCountext)
 
     const PreventClose = (e:React.MouseEvent<HTMLDivElement>) => { 
         e.stopPropagation()
@@ -74,15 +74,16 @@ export default function LogIng({isOpen, CloseModal, OpenCreate, OpenForgot}:Prop
                 else if (data[0] === "correct_password") { 
                     setCheck(false)
                     setChec2k(false)
+                    ChangeEmail(data[2])
                     ChangeUser(data[1])
                     userInt()
-                    console.log("OTRO PASO: "+stateUser)
                     router.push("./visualUser")
                 }
             })
             .catch( error=> { 
-                console.log("Error de envio")
+                console.error("Error de envio")
             })
+
         }
     }
 

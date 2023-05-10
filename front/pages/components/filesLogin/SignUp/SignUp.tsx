@@ -16,7 +16,7 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
 
     //event handler
 
-    const {stateUser,userInt,userOut,nameUser,ChangeUser} = useContext(counterCountext) 
+    const {userInt,ChangeUser,ChangeEmail} = useContext(counterCountext) 
 
     //capture data form
     const [user, setUser] = useState("")
@@ -83,28 +83,23 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
             })
             .then( response => response.json())
             .then(data => { 
-                console.log("Respuesta del back: ",data)
                 if ( typeof data === "boolean") {   
                     setCheck(true)                  
                 }
                 else if (typeof data === "object") { 
                     setCheck(false) 
+                    console.log("queee pasaaaa: "+data)
+                    ChangeEmail(data[0])
                     ChangeUser(data[1])
                     userInt()
                     router.push("/visualUser")
                 }
             })
             .catch( error=> { 
-                console.log("Error de envio")
+                console.error("Error de envio")
             })
         }
     }
-
-    useEffect(()=> {
-        console.log("Prueba: "+dataUser)
-    },[dataUser])
-
-
 
   return (
     <main className={`${isOpen ? stylesTwo.mainCreate:stylesTwo.mainCreateOff }`} onClick={CloseModal}>

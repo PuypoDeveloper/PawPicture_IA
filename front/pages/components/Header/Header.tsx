@@ -105,15 +105,12 @@ export default function Header({userIn}: Props) {
             userIn === true
             setStateInitial(true)
             setUserName(JSON.parse(nameUser))
-            console.log("Cambio de cositas: " +userIn)
         }
         else if (stateUser === false) { 
             userIn === false
             setStateInitial(false)
         }
     },[stateInitial])
-
-    console.log("QUE ESTA PASANDO ACA: "+stateUser)
 
 
     /** USER OUT */

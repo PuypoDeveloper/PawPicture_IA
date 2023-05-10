@@ -37,7 +37,7 @@ export default function Hause() {
   },[stateUser])
 
 
-  console.log("QUE ESTA PASANDO_: " +stateUser )
+
 
   /** GO PROFILE USER */
 

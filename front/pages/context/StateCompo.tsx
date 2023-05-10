@@ -3,6 +3,8 @@ import {counterCountext} from "./counterContext"
 
 export default function StateCompo({children}:{ children: React.ReactNode }) { 
 
+  //USER STATUS
+
     const [stateUser, setStateUser] = useState(() => {
         if (typeof window !== 'undefined') {
           return JSON.parse(window.localStorage.getItem('stateUser') || 'false');
@@ -30,7 +32,7 @@ export default function StateCompo({children}:{ children: React.ReactNode }) {
   }; 
 
 
-  //Name user
+  //NAME USER
 
   const [nameUser, setNameUser] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -49,6 +51,25 @@ export default function StateCompo({children}:{ children: React.ReactNode }) {
     }
   }
 
+  // EMAIL USER
+  
+  const [email, setEmail] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.localStorage.getItem('emailUser') || "false";
+    } else {
+      return "user";
+    }
+  });
+
+  const ChangeEmail = (email:string) => { 
+    try {
+      setEmail(email);
+      window.localStorage.setItem('emailUser', JSON.stringify(email));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
   return (
     <counterCountext.Provider 
@@ -58,7 +79,9 @@ export default function StateCompo({children}:{ children: React.ReactNode }) {
         userInt,
         userOut,
         nameUser,
-        ChangeUser  
+        ChangeUser,
+        email,
+        ChangeEmail   
     }} 
     >
         {children}
