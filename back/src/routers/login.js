@@ -4,14 +4,18 @@ const {Pool} = require("pg")
 
 const pool = new Pool(config)
 
+
+//encryption
+
+const herlpers = require("../lib/herlpers")
+
+
 //funtion add user
 
 const insertUser = async (user,password,name) => { 
     const text = 'INSERT INTO login (usuario, password, name) VALUES ($1, $2, $3)'
     const values = [user,password, name]
     const res = await pool.query(text, values)
-    console.log(res);
-
 }
 
 
@@ -27,16 +31,15 @@ router.post("/newUser", async (req, res) => {
         password,
         name
     }
+    newData.password = await herlpers.encryptPassword(password)
     const text = `SELECT COUNT (*) FROM login WHERE usuario ='${username}'`
     const rest = await pool.query(text)
     const count = rest.rows[0].count
     if (count < 1) { 
-        console.log("Datos recibidos; ", newData)
         insertUser(newData.username,newData.password,newData.name)
         res.send([newData.username,newData.name])
     }
     else if (count > 0) { 
-        console.log("MAYOR QUE 0")
         res.send(false)
     }
     else {
@@ -68,14 +71,14 @@ router.post("/verifyUser", async (req, res) => {
     if (checkUser === username) { 
 
         //verify password
-
         const queryPassword = `SELECT password FROM login WHERE usuario = '${username}'`
         const restTwo = await pool.query(queryPassword)
         const checkPassword = restTwo.rows[0].password
-        if(checkPassword === password) { 
-            res.send(["correct_password", queryName.rows[0].name])
+        const validPassword = await herlpers.matchPassword(password,checkPassword)
+        if(validPassword) { 
+            res.send(["correct_password", queryName.rows[0].name, username])
         }
-        else if (checkPassword !== password) { 
+        else if (!validPassword ) { 
             res.json("Incorrect_password")
         }
     }
