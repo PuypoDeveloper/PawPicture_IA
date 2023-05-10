@@ -1,8 +1,41 @@
-import React from 'react'
+import React, {useState,useEffect, useContext} from 'react'
 import styles from "./visualUser.module.css"
 import ReplayIcon from '@mui/icons-material/Replay';
+import dataDescription from "./description.json"
+import { Configuration, OpenAIApi } from "openai";
+import Image from 'next/image';
+import { counterCountext } from '../../context/counterContext';
+import { headers } from 'next/dist/client/components/headers';
+import { error } from 'console';
 
 export default function VisualUserC() {
+     //VERIFY STATE USER
+
+     const {email} = useContext(counterCountext)
+     const [addNewImage, setAddImage] = useState<object[]>([])
+
+    
+     useEffect(()=> { 
+         dataDescription.userId = JSON.parse(email) 
+         const url = "http://localhost:4000/images/SEND"
+    const formData = dataDescription
+    fetch(url,{ 
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {"content-Type":"application/json"},
+    })
+    .then (response => response.json())
+    .then(data => { 
+        console.log(data)
+        setAddImage(data)
+    })
+
+     },[email])
+
+
+    // CHARGE INFO USER
+    
+    //OPEN MODAL GENERETE IMAGES
 
     const openGeneretedImages = () => { 
         const modalGeneretedImage =  document.getElementById("modalGeneretedImage")
@@ -22,7 +55,95 @@ export default function VisualUserC() {
     const stopPropagation = (e:React.MouseEvent) => { 
         e.stopPropagation()
     }
-       
+    
+    //COUNTER ADD IMAGES
+
+    const [counter, setCounter] = useState(0)
+
+    //CONFIG API OPEN IA
+
+    const [prompt, setPrompt] = useState("");
+    const [result, setResult] = useState<string | undefined>("");
+    const [loading, setLoading] = useState(false);
+    const [placeholder, setPlaceholder] = useState(
+      "Search Bears with Paint Brushes the Starry Night, painted by Vincent Van Gogh.."
+    );
+
+    const configuration = new Configuration({
+        apiKey: "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",
+      });
+ 
+
+    const openai = new OpenAIApi(configuration);
+
+    const generateImage = async (e:React.MouseEvent) => {
+        e.preventDefault()
+        setPlaceholder(`Search ${prompt}..`);
+        setLoading(true);
+        const res = await openai.createImage({
+        prompt: prompt,
+        n: 1,
+        size: "512x512",
+        });
+        setLoading(false);
+        setResult(res.data.data[0].url);
+  };
+
+    
+// ADD IMAGES OF THE BODY 
+
+const saveImage = () => { 
+    setCounter(counter+1)
+    if (result !== undefined) { 
+        dataDescription.prompt = prompt
+        dataDescription.url = result
+        const formData = dataDescription
+        const url = "http://localhost:4000/images/URL"
+        fetch(url, { 
+            method:"POST",
+            body: JSON.stringify(formData),
+            headers: {"content-Type":"application/json"}
+        })
+        .then(response => response.json())
+        .then(data => { 
+            console.log(data)
+        })
+        .catch (error => { 
+            console.error("todo se fue a la mierda")
+        })
+    }
+
+}
+
+const addImage = (image:string) => { 
+    const newImage = {url: image}
+    setAddImage([...addNewImage,newImage])
+    
+}
+
+useEffect(()=> {
+    if (counter >= 1 && result !== undefined) { 
+        addImage(result)
+    }
+},[counter])
+
+//MASAGE STRING TOO SHORT
+
+    useEffect(()=> { 
+        const b = document.getElementById("description")
+        if(prompt.length > 5) { 
+            if (b !== null) { 
+                b.style.display = "none" 
+            }
+        }
+        else { 
+            if (b !== null) { 
+                b.style.display = "flex" 
+            }
+        }
+    },[prompt])
+
+
 
   return (
     <main className={styles.main}>
@@ -41,24 +162,44 @@ export default function VisualUserC() {
                     <img src="./img/imagesGenereted/6.png" alt="" />
                     <img src="./img/imagesGenereted/7.png" alt="" />
                     <img src="./img/imagesGenereted/8.png" alt="" />
-                    <img src="./img/imagesGenereted/9.png" alt="" />
-                    <img src="./img/imagesGenereted/10.png" alt="" />
+                    { 
+                        addNewImage.map((img,index)=> (
+                            <img key={index} src={img.url} />
+                        ))
+                    }
                 </div>
             </section>
             <section className={styles.modalGeneretedImage} id='modalGeneretedImage' onClick={closeModal}>
                 <div className={styles.ctnGenereted} onClick={stopPropagation}>
                     <div className={styles.ctnBoxesGenereted}>
-                        <div className={styles.inputText}>
+                        <form className={styles.inputText}>
                             <ReplayIcon/>
                             <h3>Describe your pet and generate a great image</h3>
-                            <textarea name="" id="" placeholder='Describe your pet'></textarea>
-                            <button>Generate</button>
-                        </div>
+                            <textarea name="" id="" placeholder={placeholder} onChange={(e) => setPrompt(e.target.value)}/>
+                            <button onClick={generateImage}>Generate</button>
+                            <p className={styles.description} id='description'>entered value too short</p>
+                        </form>
                         <div className={styles.resultImages}>
-                            <h3>Result</h3>
+                        {loading ? (
+                            <>
+                            <h2>Generating..Please Wait..</h2>
+                            <div className="lds-ripple">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            </>
+                            ) : (
+                                <>
+                                {result.length > 0 ? (
+                                    <img className="result-image" src={result} alt="result" />
+                                ) : (
+                                    <></>
+                                )}
+                                </>
+                            )}
                         </div>
                     </div>
-                    <button>Save</button>
+                    <button onClick={saveImage}>Save</button>
                     <button>Discart</button>
                 </div>
             </section>  

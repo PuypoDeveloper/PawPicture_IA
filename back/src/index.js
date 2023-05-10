@@ -5,6 +5,7 @@ const path = require('path');
 const cors = require("cors")
 
 
+
 const app = express()
 
 
@@ -19,7 +20,8 @@ app.use((req, res, next) => {
 })
 
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: '*',
+    methods: ['GET']
   }));
   
 
@@ -33,7 +35,7 @@ app.use(require("./routers/autentications"))
 
 // Route sing up and sing in
 app.use("/links",require("./routers/login"))
-
+app.use("/images",require("./routers/images"))
 
 
 //listen

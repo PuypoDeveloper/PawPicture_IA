@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from "./SignUp.module.css"
 import stylesTwo from "../general.module.css"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import data from "./SignUp.json"
 import { useRouter } from 'next/router';
+import { counterCountext } from '../../../context/counterContext';
 
 interface Props { 
     isOpen: boolean,
@@ -12,6 +13,10 @@ interface Props {
 }
 
 export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
+
+    //event handler
+
+    const {userInt,ChangeUser,ChangeEmail} = useContext(counterCountext) 
 
     //capture data form
     const [user, setUser] = useState("")
@@ -28,7 +33,7 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
 
     const captureUser = (e:React.ChangeEvent<HTMLInputElement>) => { 
         const a = e.target.value 
-        data.email = a
+        data.username = a
         setUser(a)
     }
     const capturePassword = (e:React.ChangeEvent<HTMLInputElement>) => { 
@@ -63,7 +68,7 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
 
     const [check, setCheck] = useState(false)
     const router = useRouter()
-    const [dataUser, setDataUser] = useState({})
+    const [dataUser, setDataUser] = useState([])
 
     const createAcount = (e:React.MouseEvent<HTMLButtonElement>)=> { 
         e.preventDefault()
@@ -78,27 +83,23 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
             })
             .then( response => response.json())
             .then(data => { 
-                console.log("Respuesta del back: ",data)
                 if ( typeof data === "boolean") {   
                     setCheck(true)                  
                 }
                 else if (typeof data === "object") { 
                     setCheck(false) 
-                    setDataUser(data)
+                    console.log("queee pasaaaa: "+data)
+                    ChangeEmail(data[0])
+                    ChangeUser(data[1])
+                    userInt()
                     router.push("/visualUser")
                 }
             })
             .catch( error=> { 
-                console.log("Error de envio")
+                console.error("Error de envio")
             })
         }
     }
-
-    useEffect(()=> {
-        console.log("Prueba: "+dataUser)
-    },[dataUser])
-
-
 
   return (
     <main className={`${isOpen ? stylesTwo.mainCreate:stylesTwo.mainCreateOff }`} onClick={CloseModal}>
