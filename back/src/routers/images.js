@@ -2,6 +2,8 @@ const express = require("express")
 const config = require("./database")
 const {Pool} = require("pg")
 const cors = require("cors")
+const imageDownloader = require('./image-downloader').download
+const uuid = require("uuid")
 
 const router = express.Router()
 const pool = new Pool(config)
@@ -15,8 +17,12 @@ const corsOptions = {
 //INSERT URL 
 
 const insertURL = async (prompt,url,id) => { 
+    const uniqueIdImage = uuid.v4()
+    const timestamp = Date.now()
+    const filename = './images/'.concat(`${uniqueIdImage}${timestamp}.jpg`);
+    imageDownloader(url, filename, function(){});
     const queryInsert = `INSERT INTO images (description, url, user_id) VALUES ($1, $2, $3)`
-    const values = [prompt,url,id]
+    const values = [prompt,filename,id]
     const res = await pool.query(queryInsert,values)
 }
 
@@ -52,11 +58,11 @@ router.post("/SEND", async (req, res) => {
     }
     const queryId  = `SELECT id FROM login WHERE usuario = '${userId}'`
     const id = await pool.query(queryId)
-    const idtwo1 = id.rows[0].id
-    console.log("RESPUESTAAAAAAAAAAAAAA")
-    console.log(idtwo1)
-    const urlsend = `SELECT url FROM images WHERE user_id = '${idtwo1}'` 
-    const resSend = await pool.query(urlsend)
-    console.log(resSend.rows)
-    res.send(resSend.rows)
+    const newId = id.rows[0].id
+    const imagesSend = `SELECT url FROM images WHERE user_id = ${newId}`
+    const resImagesSend = await pool.query(imagesSend)
+    const urlImage = resImagesSend.rows
+    console.log(urlImage)
+    res.send(urlImage)
+    
 })
