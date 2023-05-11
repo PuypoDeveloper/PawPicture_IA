@@ -10,7 +10,7 @@
 .mainLogin,
 .mainCreate,
 .OpenModal { 
-    background-color: rgba(137, 43, 226, 0.274);
+    background-color: rgba(137, 43, 226, 0.133);
     width: 99vw;
     height: 100vh;
     display: flex;

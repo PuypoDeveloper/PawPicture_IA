@@ -7,6 +7,12 @@ import Image from 'next/image';
 import { counterCountext } from '../../context/counterContext';
 import { headers } from 'next/dist/client/components/headers';
 import { error } from 'console';
+import BtnHome from '../Elements/Buttons/BtnHome';
+import { Inter,Fredoka } from '@next/font/google'
+
+
+const fredoka = Fredoka({ subsets: ["latin"], 
+weight: ["400","600"]})
 
 export default function VisualUserC() {
      //VERIFY STATE USER
@@ -66,7 +72,7 @@ export default function VisualUserC() {
     const [result, setResult] = useState<string | undefined>("");
     const [loading, setLoading] = useState(false);
     const [placeholder, setPlaceholder] = useState(
-      "Search Bears with Paint Brushes the Starry Night, painted by Vincent Van Gogh.."
+      "Search"
     );
 
     const configuration = new Configuration({
@@ -142,6 +148,7 @@ useEffect(()=> {
             }
         }
     },[prompt])
+    
 
 
 
@@ -149,10 +156,10 @@ useEffect(()=> {
     <main className={styles.main}>
         <div className={styles.ctnPerfilUser}>
             <section className={styles.btnGenerateImage}>
-                <button onClick={openGeneretedImages}>Generate images</button>
+                <div onClick={openGeneretedImages} className={styles.ctnImages}><BtnHome text={"Generate images"} color={false}/></div>
             </section>
             <section className={styles.yourImages}>
-                <h2>your images</h2>
+                <h2>Your images</h2>
                 <div className={styles.generatedImages}>
                     <img src="./img/imagesGenereted/1.png" alt="" />
                     <img src="./img/imagesGenereted/2.png" alt="" />
@@ -173,25 +180,31 @@ useEffect(()=> {
                 <div className={styles.ctnGenereted} onClick={stopPropagation}>
                     <div className={styles.ctnBoxesGenereted}>
                         <form className={styles.inputText}>
-                            <ReplayIcon/>
-                            <h3>Describe your pet and generate a great image</h3>
+                            <h3 className={fredoka.className}>Describe your pet and generate a great image</h3>
                             <textarea name="" id="" placeholder={placeholder} onChange={(e) => setPrompt(e.target.value)}/>
-                            <button onClick={generateImage}>Generate</button>
-                            <p className={styles.description} id='description'>entered value too short</p>
+                            <div onClick={generateImage} className={styles.ctnBtnGeneretedImages}><BtnHome text={"Generate images"} color={false}/></div>
                         </form>
                         <div className={styles.resultImages}>
                         {loading ? (
                             <>
-                            <h2>Generating..Please Wait..</h2>
-                            <div className="lds-ripple">
-                                <div></div>
-                                <div></div>
+                            <div className={styles.ctnAnimationCreateImage}>
+                                <h2 className={`${styles.textPlaseWait} ${fredoka.className}`}>Generating Please Wait...</h2>
+                                <div className={styles.parent}>
+                                    <div className={`${styles.child} ${styles.one}`}></div> 
+                                    <div className={`${styles.child} ${styles.two}`}></div> 
+                                    <div className={`${styles.child} ${styles.three}`}></div> 
+                                    <div className={`${styles.child} ${styles.four}`}></div> 
+                                    <div className={`${styles.child} ${styles.five}`}></div> 
+                                    <div className={`${styles.child} ${styles.sex}`}></div> 
+
+                                    
+                                </div>
                             </div>
-                            </>
+                                                </>
                             ) : (
                                 <>
                                 {result.length > 0 ? (
-                                    <img className="result-image" src={result} alt="result" />
+                                    <img className={styles.result_image} src={result} alt="result" />
                                 ) : (
                                     <></>
                                 )}
@@ -199,8 +212,7 @@ useEffect(()=> {
                             )}
                         </div>
                     </div>
-                    <button onClick={saveImage}>Save</button>
-                    <button>Discart</button>
+                    <div className={styles.ctnBtnSaveImage} onClick={saveImage}><BtnHome text={"Save"} color={true}/></div>
                 </div>
             </section>  
         </div>
