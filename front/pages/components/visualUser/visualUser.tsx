@@ -23,7 +23,7 @@ export default function VisualUserC() {
     
      useEffect(()=> { 
          dataDescription.userId = JSON.parse(email) 
-         const url = "http://localhost:4000/images/SEND"
+         const url = "https://pawpicture.fly.dev/images/SEND"
     const formData = dataDescription
     fetch(url,{ 
         method: "POST",
@@ -76,7 +76,7 @@ export default function VisualUserC() {
     );
 
     const configuration = new Configuration({
-        apiKey: "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",
+        apiKey: "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",
       });
  
 
@@ -104,7 +104,7 @@ const saveImage = () => {
         dataDescription.prompt = prompt
         dataDescription.url = result
         const formData = dataDescription
-        const url = "http://localhost:4000/images/URL"
+        const url = "https://pawpicture.fly.dev/images/URL"
         fetch(url, { 
             method:"POST",
             body: JSON.stringify(formData),
@@ -170,7 +170,7 @@ useEffect(()=> {
                     <img src="./img/imagesGenereted/7.png" alt="" />
                     <img src="./img/imagesGenereted/8.png" alt="" />
                     { 
-                        addNewImage.map((img,index)=> (
+                        addNewImage.map((img: any,index)=> (
                             <img key={index} src={img.url} />
                         ))
                     }
@@ -203,11 +203,11 @@ useEffect(()=> {
                                                 </>
                             ) : (
                                 <>
-                                {result.length > 0 ? (
+                                {result ? (
                                     <img className={styles.result_image} src={result} alt="result" />
-                                ) : (
-                                    <></>
-                                )}
+                                    ) : (
+                                 <></>
+                                    )}
                                 </>
                             )}
                         </div>

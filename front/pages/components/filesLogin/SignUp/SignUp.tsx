@@ -77,8 +77,7 @@ export default function SignUp({isOpen,CloseModal,OpenLogIn}:Props) {
         e.preventDefault()
         if (user.length > 1 && password.length > 1 && name.length>1 && passwordEquals === false) { 
             const formData = data
-            const enpoint = 'http://localhost:4000/links/newUser'
-            const enpointUser = 'http://localhost:4000/links/verifyUser'
+            const enpoint = 'https://pawpicture.fly.dev/links/newUser'
             fetch(enpoint, {
                 method: "POST",
                 body: JSON.stringify(formData),

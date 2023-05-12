@@ -102,7 +102,7 @@ export default function Header({userIn}: Props) {
 
     /** user state */
 
-    const {stateUser,userInt,userOut,ChangeUser,nameUser} = useContext(counterCountext) 
+    const {stateUser,userOut,nameUser} = useContext(counterCountext) 
     const [stateInitial, setStateInitial] = useState(userIn)
     const [userName, setUserName] = useState("user")
 
