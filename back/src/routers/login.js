@@ -13,7 +13,7 @@ const herlpers = require("../lib/herlpers")
 //funtion add user
 
 const insertUser = async (user,password,name) => { 
-    const text = 'INSERT INTO login (usuario, password, name) VALUES ($1, $2, $3)'
+    const text = 'INSERT INTO users (email, password, name) VALUES ($1, $2, $3)'
     const values = [user,password, name]
     const res = await pool.query(text, values)
 }
@@ -32,7 +32,7 @@ router.post("/newUser", async (req, res) => {
         name
     }
     newData.password = await herlpers.encryptPassword(password)
-    const text = `SELECT COUNT (*) FROM login WHERE usuario ='${username}'`
+    const text = `SELECT COUNT (*) FROM users WHERE email ='${username}'`
     const rest = await pool.query(text)
     const count = rest.rows[0].count
     if (count < 1) { 
@@ -60,18 +60,18 @@ router.post("/verifyUser", async (req, res) => {
 
     //name user
 
-    const nameUser = `SELECT name FROM login WHERE usuario = '${username}'`
+    const nameUser = `SELECT name FROM users WHERE email = '${username}'`
     const queryName = await pool.query(nameUser)
 
     //check if account exists
 
-    const queryUsername = `SELECT usuario FROM login WHERE usuario = '${username}'`
+    const queryUsername = `SELECT email FROM users WHERE email = '${username}'`
     const rest = await pool.query(queryUsername)
-    const checkUser = rest.rows[0] && rest.rows[0].usuario;
+    const checkUser = rest.rows[0] && rest.rows[0].email;
     if (checkUser === username) { 
 
         //verify password
-        const queryPassword = `SELECT password FROM login WHERE usuario = '${username}'`
+        const queryPassword = `SELECT password FROM users WHERE email = '${username}'`
         const restTwo = await pool.query(queryPassword)
         const checkPassword = restTwo.rows[0].password
         const validPassword = await herlpers.matchPassword(password,checkPassword)
