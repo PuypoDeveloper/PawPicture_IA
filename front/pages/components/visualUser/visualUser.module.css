@@ -1,16 +1,13 @@
 
 .main { 
-    height: 100vh;
-    margin-top: -3.5em;
-    background-color: aqua;
+    margin-top: 0.1em;
+    background-color: rgb(0, 0, 0);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .ctnPerfilUser { 
-    background-color: darkgreen;
-    margin-top: 3.5em;
     height: 90%;
     width: 97%;
     align-items: center;
@@ -23,13 +20,24 @@
 
 .btnGenerateImage { 
     margin-top: 2em;
-    height: 10em !important;
-    background-color: aqua;
+    height: 4em;
+    width: 12em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ctnImages { 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* STYLES IMAGES GENERETED*/
 .yourImages { 
-    margin-top: 4em;
+    margin-top: 2em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,14 +45,20 @@
     gap: 2em;
 }
 
+.yourImages h2 { 
+    color: white;
+} 
+
 .generatedImages { 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: auto; 
+    grid-auto-flow: row; 
     gap: 1em;
 }
 .generatedImages img { 
-    width: 20em;
-    height: 20em;
+    width: 100%; 
+    height: 100%;
     border-radius: 10px;
 }
 
@@ -54,16 +68,19 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgb(254, 1, 203);
+    background-color: rgba(137, 43, 226, 0.133);
     width: 100vw;
     height: 100vh;
     justify-content: center;
     align-items: center;
     position: fixed;
+    backdrop-filter: blur(5px);
 }
 
 .ctnGenereted { 
-    background-color: chartreuse;
+    background-color: rgb(0, 0, 0);
+    box-shadow: 0px 1px 5px 1px rgb(8, 93, 230);
+    border-radius: 10px;
     padding: 1em;
     height: 40em;
     width: 70em;
@@ -79,9 +96,188 @@
 }
 .inputText,
 .resultImages { 
-    background-color: aqua;
+    box-shadow: 0px 1px 5px 1px rgba(179, 13, 204, 0.19);
+    border-radius: 10px;
+    padding: 1em;
+}
+.resultImages { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .inputText { 
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
+
+.inputText h3 { 
+    text-align: center;
+    color: white;
+    font-weight: 600;
+}
+
+.inputText textarea { 
+    padding: 0.5em;
+    height: 50%;
+    border-radius: 10px;
+    margin-top: 2em;
+}
+
+.description { 
+    display: none;
+}
+.ctnBtnGeneretedImages { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3em;
+    width: 15em;
+    margin: auto;
+}
+.ctnBtnSaveImage { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3em;
+    width: 20em;
+    margin: auto;
+}
+.textPlaseWai { 
+    text-align: center;
+    font-weight: 600;
+}
+
+.result_image { 
+    border-radius: 10px;
+    width: 80%;
+    margin: auto;
+}
+
+.ctnAnimationCreateImage { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*LOUDING*/
+
+
+  .parent{
+    margin: 140px auto 20px;
+    display: flex;
+    justify-content: center;
+    animation-name: move;
+    animation-duration: 2s;
+  }
+  .child{
+    margin: 0 2px;
+    width: 30px;
+    height: 30px;
+    background-color: #423591;
+    border-radius: 50%;
+    animation-name: looding;
+    animation-duration: .5s;
+    animation-iteration-count: infinite;
+    animation-direction:alternate ;
+  }
+  .two{
+    animation-delay: .1s ;
+  }
+  .three{
+    animation-delay: .2s ;
+  }
+  .four{
+    animation-delay: .3s ;
+  }
+  .five{
+    animation-delay: .4s ;
+  }
+  .sex{
+    animation-delay: .5s ;
+  }
+  @keyframes looding {
+    from{
+      transform: translateY(0px);
+    }
+    to{
+      transform: translateY(-30px);
+      opacity: .2;
+    }
+  }
+  @keyframes move {
+    from{
+      margin-left: 10px;
+    }
+    to{
+      margin-left: 0;
+    }
+  }
+  .info
+  {
+    margin: 10px auto;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: fantasy;
+    font-size: 30px;
+    letter-spacing: 0px;
+    animation-name:inform;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-direction: alternate;
+  }
+  @keyframes inform {
+    to{
+      opacity: .1;
+    }
+  }
+
+  /*RESPONSIE*/
+  @media(max-width:1160px) { 
+    .ctnGenereted { 
+        width: 90%;
+    }
+}
+
+  @media(max-width: 900px) { 
+    .generatedImages { 
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+  }
+  @media(max-width: 500px) { 
+    .generatedImages { 
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media(max-width: 900px){ 
+    .ctnBoxesGenereted { 
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+    .result_image { 
+       width: 16em;
+    }
+    .ctnBtnGeneretedImages { 
+        margin-top: 1em;
+    }
+}
+@media(max-width: 666px) { 
+    .ctnBoxesGenereted { 
+        gap: 0.5em;
+    }
+}
+@media(max-width: 380px) { 
+    .ctnBtnSaveImage { 
+        width: 12em;
+    }
+    .result_image { 
+        width: 12em;
+     }
+     .ctnBtnGeneretedImages { 
+        width: 12em;
+     }
+}
+  

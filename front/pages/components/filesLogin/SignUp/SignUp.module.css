@@ -1,12 +1,22 @@
-.ctnCreate{ 
-    background-color:brown;
-    padding: 1em;
+.ctnDivForm { 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
-    margin: auto;
+
+    }
+.ctnFormLogin2 { 
+    width: 90%;
+}
+.ctnDivForm input { 
+    border-radius: 5px;
+    padding: 0.2em;
+}
+.ctnSection2 { 
+    position: relative;
+}
+.form2 { 
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 .passwordEqual { 
@@ -20,4 +30,18 @@
 }
 .emailIncorrectOf { 
     display: none;
+}
+.title  { 
+    text-align: center;
+}
+
+@media(max-height: 730px ) { 
+    .form2 { 
+        gap: 0em;
+    }
+}
+@media(max-width: 310px) { 
+    .title { 
+        font-size: 20px !important;
+    }
 }

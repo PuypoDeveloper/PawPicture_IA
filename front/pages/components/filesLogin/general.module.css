@@ -10,12 +10,13 @@
 .mainLogin,
 .mainCreate,
 .OpenModal { 
-    background-color: rgba(137, 43, 226, 0.846);
-    width: 100vw;
+    background-color: rgba(137, 43, 226, 0.133);
+    width: 99vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(5px);
   }
   
 .mainLoginOff,

@@ -15,7 +15,7 @@ import useModalStart from './hooks/useModalStart'
 
 interface Props { 
   On: boolean
-  onSign: boolean
+  onSign: boolean,
 }
 
 export default function HandlingSatus({On,onSign}:Props) {
@@ -26,7 +26,7 @@ export default function HandlingSatus({On,onSign}:Props) {
   const [IsOpenModalCreate, OpenModalCreate, CloseModalCreate] =  useModalCreate()
   const [IsOpenModalCode, OpenModalCode, CloseModalCode] =  useModalCode()
   const [IsOpenModalCheck, OpenModalCheck, CloseModalCheck] =  useModalCheck()
-  const [IsOpenModalStart, OpenModalStart, CloseModalStart] =  useModalStart()
+
 
 
   useEffect(()=> { 

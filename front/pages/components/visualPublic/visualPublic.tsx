@@ -2,10 +2,11 @@ import React from 'react'
 import styles from "./stylesVisualPublic.module.css"
 
 export default function VisualPublic() {
+
   return (
     <main className={styles.main}>
         <div className={styles.ctnAllImages}>
-            <h2>all images generate</h2>
+            <h2>All generated images</h2>
             <div className={styles.Images}>
                     <img src="./img/imagesGenereted/1.png" alt="" />
                     <img src="./img/imagesGenereted/2.png" alt="" />

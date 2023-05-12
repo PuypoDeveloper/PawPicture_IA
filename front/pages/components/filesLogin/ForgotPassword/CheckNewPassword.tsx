@@ -1,6 +1,8 @@
 import React from 'react'
-import styles from "./ForgotPassword.module.css"
+import styles from "../Login/logIng.module.css"
+import stylesThree from "./ForgotPassword.module.css"
 import stylesTwo from "../general.module.css"
+import BtnHome from '../../Elements/Buttons/BtnHome'
 
 interface Props { 
   isOpen: boolean,
@@ -13,11 +15,13 @@ export default function CheckNewPassword({isOpen, CloseModal}:Props) {
   }
   return (
     <main className={`${isOpen ? stylesTwo.OpenModal : stylesTwo.CloseModal}`} onClick={CloseModal}>
-        <section className={styles.ctnFormLogin} onClick={stopPropagation}>
-            <img src="" alt="" />
+      <div className={styles.ctnModal2}>
+        <section className={`${styles.ctnSection} ${stylesThree.ctnSection4}`}  onClick={stopPropagation}>
+            <img src="./img/iconos/check.png" alt="" />
             <p>Password changed successfully</p>
-            <button onClick={CloseModal}>Okey</button>
+            <div onClick={CloseModal} className={stylesThree.ctnBtn3}><BtnHome text={"Okey"} color={true}/></div>
         </section>
+      </div>
     </main>
   )
 }

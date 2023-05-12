@@ -1,10 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import styles from "./logIng.module.css"
 import stylesTwo from "../general.module.css"
 import Link from 'next/link'
 import data from "./data.json"
 import { useRouter } from 'next/router'
 import cors from "cors"
+import useUserState from '../../hooks/stateUser'
+import { counterCountext } from '../../../context/counterContext'
+import BtnHome from '../../Elements/Buttons/BtnHome'
 
 
 
@@ -16,6 +19,11 @@ interface Props {
 }
 
 export default function LogIng({isOpen, CloseModal, OpenCreate, OpenForgot}:Props) {
+
+
+    //state of user
+     
+    const {userInt,ChangeUser,ChangeEmail} = useContext(counterCountext)
 
     const PreventClose = (e:React.MouseEvent<HTMLDivElement>) => { 
         e.stopPropagation()
@@ -45,11 +53,11 @@ export default function LogIng({isOpen, CloseModal, OpenCreate, OpenForgot}:Prop
   
     const router = useRouter();
 
-    const assessData = (e:React.MouseEvent<HTMLButtonElement>) => { 
+    const assessData = (e:React.MouseEvent) => { 
         e.preventDefault()
         if (username.length >1 && password.length>1) { 
             const formData = data
-            const a = 'http://localhost:4000/links/verifyUser'
+            const a = 'https://pawpicture.fly.dev/links/verifyUser'
             fetch(a, { 
                 method: "POST",
                 body:JSON.stringify(formData),
@@ -64,15 +72,19 @@ export default function LogIng({isOpen, CloseModal, OpenCreate, OpenForgot}:Prop
                     setCheck(false)
                     setChec2k(true)
                 }
-                else if (data === "correct_password") { 
+                else if (data[0] === "correct_password") { 
                     setCheck(false)
                     setChec2k(false)
+                    ChangeEmail(data[2])
+                    ChangeUser(data[1])
+                    userInt()
                     router.push("./visualUser")
                 }
             })
             .catch( error=> { 
-                console.log("Error de envio")
+                console.error("Error de envio")
             })
+
         }
     }
 
@@ -81,44 +93,51 @@ export default function LogIng({isOpen, CloseModal, OpenCreate, OpenForgot}:Prop
     <main className={`${isOpen ? stylesTwo.mainLogin: stylesTwo.mainLoginOff}`} onClick={()=>{ 
         CloseModal()
     }}>
-        <div className={styles.ctnSection} onClick={PreventClose}>
-            <section className={styles.nameIcon}>
-                <div>
-                    <img src="./img/logo.png" alt="" className={stylesTwo.imageLogo}  />
-                    <h2>Sign in to CatDog IA</h2>
-                </div>
-            </section>
-            <section className={styles.ctnFormLogin}>
-                <form action="" className={styles.Form}>
-                    <div className={styles.username}>
-                        <p>Username or email address</p>
-                        <input type="text" onChange={captureUsername} />
-                        <p className={check ? styles.notRegisterAccountOn : styles.notRegisterAccountOf}>account not registered</p>
+        <div className={styles.ctnModal}>
+            <div className={styles.ctnSection} onClick={PreventClose}>
+                <section className={styles.nameIcon}>
+                    <div>
+                        <img src="./img/logo.png" alt="" className={stylesTwo.imageLogo}  />
+                        <h2 className={styles.title}>Sign in to PawPicture IA</h2>
                     </div>
-                    <div className={styles.ctnPassword}>
-                        <div>
-                            <p>Password</p>
-                            <a href="" onClick={()=> { 
-                                CloseModal()
-                                OpenForgot()
-                            }
-                            }>Forgot Password ?</a>
+                </section>
+                <section className={styles.ctnFormLogin}>
+                    <form action="" className={styles.Form}>
+                        <div className={styles.username}>
+                            <p>email</p>
+                            <input type="text" onChange={captureUsername} />
+                            <p className={check ? styles.notRegisterAccountOn : styles.notRegisterAccountOf}>account not registered</p>
                         </div>
-                        <input type="password" onChange={capturepassword}/>
-                        <p className={check2 ? styles.incorrectPasswordOn : styles.incorrectPasswordOf }>Incorrect password</p>
+                        <div className={styles.ctnPassword}>
+                            <div>
+                                <p>Password</p>
+                                <a href="" onClick={()=> { 
+                                    CloseModal()
+                                    OpenForgot()
+                                }
+                                } className={styles.textForgotPasswordOne}>Forgot Password ?</a>
+                            </div>
+                            <input type="password" onChange={capturepassword}/>
+                            <a href="" onClick={()=> { 
+                                    CloseModal()
+                                    OpenForgot()
+                                }
+                                } className={styles.textForgotPasswordTwo}>Forgot Password ?</a>
+                            <p className={check2 ? styles.incorrectPasswordOn : styles.incorrectPasswordOf }>Incorrect password</p>
+                        </div>
+                        <div className={styles.btnLogIn} onClick={assessData}><BtnHome text={"Log In"} color={true}/></div>
+                    </form>
+                </section>
+                <section className={styles.newInCatDog}>
+                    <div>
+                        <p>New to CatDog IA ?</p>
+                        <a href="" onClick={()=> { 
+                            CloseModal()
+                            OpenCreate()
+                        }}>Create an account</a>
                     </div>
-                    <button className={styles.btnLogIn} onClick={assessData}>Entrar</button>
-                </form>
-            </section>
-            <section className={styles.newInCatDog}>
-                <div>
-                    <p>New to CatDog IA ?</p>
-                    <a href="" onClick={()=> { 
-                        CloseModal()
-                        OpenCreate()
-                    }}>Create an account</a>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
     </main>
   )
