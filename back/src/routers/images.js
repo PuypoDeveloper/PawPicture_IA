@@ -1,5 +1,4 @@
 const express = require("express")
-const config = require("./database")
 const cors = require("cors")
 const imageDownloader = require('./image-downloader').download
 const uuid = require("uuid")
