@@ -1,13 +1,12 @@
-const { urlencoded } = require("body-parser")
+const path = require('path');
+const cors = require("cors");
 const express = require ( "express")
 const morgan  = require ("morgan")
-const path = require('path');
-const cors = require("cors")
+const { urlencoded } = require("body-parser")
 
 
 
 const app = express()
-
 
 app.set("port", process.env.PORT || 4000)
 app.use(morgan("dev"))
@@ -26,22 +25,25 @@ app.use(cors({
   
 
 //Public
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use(require("./routers/index"))
 app.use(require("./routers/autentications"))
 
+// CORS
+const corsOptions = {
+    origin: '*',
+    credentials: true,
+  }
+router.use(cors(corsOptions));
+
 // Route sing up and sing in
 app.use("/links",require("./routers/login"))
 app.use("/images",require("./routers/images"))
 
 
-
-
 //listen
-
 app.listen(app.get("port"), ()=> { 
     console.log(`listen on port ${app.get("port")}`)
 })

@@ -1,6 +1,5 @@
 const express = require("express")
 const config = require("./database")
-const {Pool} = require("pg")
 const cors = require("cors")
 const imageDownloader = require('./image-downloader').download
 const uuid = require("uuid")
@@ -8,17 +7,6 @@ const path = require("path")
 
 const router = express.Router()
 
-const pool = new Pool(config)
-
-
-
-
-
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    credentials: true,
-  }
-  router.use(cors(corsOptions));
 
 //INSERT URL 
 
