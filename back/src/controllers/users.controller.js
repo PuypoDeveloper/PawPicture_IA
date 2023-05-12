@@ -13,7 +13,7 @@ userController.createNew = async (req, res) => {
     newData.password = await herlpers.encryptPassword(password);
 
     const rest = await userRepository.countUserByEmail(username);
-    const count = rest.rows[0].count;
+    const { count } = rest.rows[0];
     if (count < 1) { 
         await userRepository.create(newData.username, newData.password, newData.name);
         return res.send([newData.username, newData.name])

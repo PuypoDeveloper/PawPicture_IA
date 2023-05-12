@@ -2,31 +2,35 @@ const pool = require('../database/init')
 
 const userRepository = {};
 
-userRepository.create = async (user, password, name) => {
-    const text = 'INSERT INTO users (email, password, name) VALUES ($1, $2, $3)'
-    const values = [user,password, name]
-    return pool.query(text, values)
+userRepository.create = async (email, password, name) => {
+    const query = 'INSERT INTO users (email, password, name) VALUES ($1, $2, $3)'
+    const values = [email,password, name]
+    return pool.query(query, values)
 }
 
-userRepository.countUserByEmail = async (username) => {
-    const text = `SELECT COUNT (*) FROM users WHERE email ='${username}'`;
-    return pool.query(text);
+userRepository.countUserByEmail = async (email) => {
+    const query = `SELECT COUNT (*) FROM users WHERE email ='${email}'`;
+    return pool.query(query);
 }
 
-userRepository.findUserNameByEmail = async (username) => {
-    const nameUser = `SELECT name FROM users WHERE email = '${username}'`
-    return pool.query(nameUser)
+userRepository.findUserNameByEmail = async (email) => {
+    const query = `SELECT name FROM users WHERE email = '${email}'`
+    return pool.query(query)
 }
 
-userRepository.getPasswordByEmail = async (username) => {
-    const queryPassword = `SELECT password FROM users WHERE email = '${username}'`
-    return pool.query(queryPassword)
+userRepository.getPasswordByEmail = async (email) => {
+    const query = `SELECT password FROM users WHERE email = '${email}'`
+    return pool.query(query)
 }
 
-userRepository.getEmailByEmail = async (username) => {
-    const queryUsername = `SELECT email FROM users WHERE email = '${username}'`
-    return pool.query(queryUsername)
+userRepository.getEmailByEmail = async (email) => {
+    const query = `SELECT email FROM users WHERE email = '${email}'`
+    return pool.query(query)
+}
 
+userRepository.selectIdByEmail = async (email) => {
+    const query  = `SELECT id FROM users WHERE email = '${email}'`;
+    return await pool.query(query);
 }
 
 module.exports = userRepository;
