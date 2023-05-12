@@ -7,7 +7,7 @@ const imagesRepository = require('../repository/images.repository');
 
 const imagesController = {};
 
-imagesController.downloadImage() = async (url) =>{
+imagesController.downloadImage = async (url) =>{
     const uniqueIdImage = uuid.v4()
     const timestamp = Date.now()
     const filename = path.join( __dirname,'../public/images/'.concat(`${uniqueIdImage}${timestamp}.jpg`));

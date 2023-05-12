@@ -1,3 +1,5 @@
+const pool = require('../database/init');
+
 const imagesRepository = {};
 
 imagesRepository.saveImage = async (prompt, filename, id) => {

@@ -28,9 +28,9 @@ userRepository.getEmailByEmail = async (email) => {
     return pool.query(query)
 }
 
-userRepository.selectIdByEmail = async (email) => {
+userRepository.getIdByEmail = async (email) => {
     const query  = `SELECT id FROM users WHERE email = '${email}'`;
-    return await pool.query(query);
+    return pool.query(query);
 }
 
 module.exports = userRepository;

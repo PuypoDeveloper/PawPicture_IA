@@ -18,8 +18,8 @@ app.use(cors({ origin: '*', methods: ['GET'] }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Route sing up and sing in
-app.use("/links",require("./routers/login"));
-app.use("/images",require("./routers/images"));
+app.use("/links",require("./routers/login.routes"));
+app.use("/images",require("./routers/images.routes"));
 
 
 //listen

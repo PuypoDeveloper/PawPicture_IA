@@ -1,3 +1,4 @@
+const herlpers = require("../lib/herlpers");
 const userRepository = require('../repository/user.repository');
 
 const userController = {};
@@ -32,10 +33,13 @@ userController.verifyUser = async (req, res) => {
 
     //name user
     const userName = await userRepository.findUserNameByEmail(username)
+    if (userName.rows[0] == undefined || userName.rows[0] == null) { 
+        return res.json("nonexistent_account")
+    }
 
     //check if account exists
-    const rest = userRepository.getEmailByEmail(username)
-    const checkUser = rest.rows[0] && rest.rows[0].email;
+    const data = await userRepository.getEmailByEmail(username)
+    const checkUser =  data.rows[0] && data.rows[0].email;
     if (checkUser === username) { 
 
         //verify password
@@ -52,9 +56,6 @@ userController.verifyUser = async (req, res) => {
         }
     }
     
-    if (checkUser === undefined || checkUser === null) { 
-        return res.json("nonexistent_account")
-    }
 }
 
 module.exports = userController;
