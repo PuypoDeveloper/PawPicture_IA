@@ -57,7 +57,7 @@ export default function LogIng({isOpen, CloseModal, OpenCreate, OpenForgot}:Prop
         e.preventDefault()
         if (username.length >1 && password.length>1) { 
             const formData = data
-            const a = 'https://pawpicture.fly.dev/links/verifyUser'
+            const a = 'http://localhost:4000/links/verifyUser'
             fetch(a, { 
                 method: "POST",
                 body:JSON.stringify(formData),
