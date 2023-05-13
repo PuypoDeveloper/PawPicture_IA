@@ -1,5 +1,6 @@
 const uuid = require("uuid");
 const path = require("path");
+require("dotenv").config()
 const azureStorage = require("azure-storage")
 const imageDownloader = require('./image-downloader').download;
 const userRepository = require('../repository/user.repository');
@@ -8,7 +9,7 @@ const imagesRepository = require('../repository/images.repository');
 
 
 //azure storage
-const connectionString = "DefaultEndpointsProtocol=https;AccountName=imagespawpictures;AccountKey=NU9k3HEVUolISR3yQQv4cyXxyCW0P5ej35Z+6ixkFA2HcjbZJFFmip6yy+IaQbe0g875mDxubGzL+ASt2bovxA==;EndpointSuffix=core.windows.net"
+const connectionString = process.env.CONNECTION_STRING;
 const blobService = azureStorage.createBlobService(connectionString)
 const containerName = 'imagenes';
 
